@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -20,6 +22,7 @@ public class StoreActivity extends AppCompatActivity {
             image1Strings, image2Strings, image3Strings,
             image4Strings, image5Strings, apkStrings;
     private String urlJSON = "http://swiftcodingthai.com/Moo/get_store_master.php";
+    private String urlAPK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,15 @@ public class StoreActivity extends AppCompatActivity {
                         nameStrings, descripStrings, image1Strings);
                 listView.setAdapter(myAdapter);
 
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        myInstallApp(nameStrings[i], apkStrings[i]);
+
+                    }
+                });
+
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -95,6 +107,13 @@ public class StoreActivity extends AppCompatActivity {
 
         }   // onPost
     }   // Connected Class
+
+    private void myInstallApp(String nameString, String apkString) {
+
+        urlAPK = apkString;
+        Log.d("StoreV3", "urlAPK ==> " + urlAPK);
+
+    }   // myInstall
 
 
     private void synMySQLStore() {
