@@ -46,6 +46,13 @@ public class MainActivity extends AppCompatActivity {
 
     }   // Main Method
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        deleteAllSQLite();
+        synMySQLtoSQLite();
+    }
+
     public void clickSignIn(View view) {
 
         userString = userEditText.getText().toString().trim();
