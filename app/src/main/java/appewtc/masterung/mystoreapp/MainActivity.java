@@ -49,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
+        Log.d("StoreV1", "Resume ทำงาน");
+
         deleteAllSQLite();
         synMySQLtoSQLite();
     }
@@ -86,6 +89,12 @@ public class MainActivity extends AppCompatActivity {
             //Check Password
             if (passwordString.equals(loginStrings[4])) {
                 //Password True
+
+                Intent intent = new Intent(MainActivity.this, StoreActivity.class);
+                intent.putExtra("Login", loginStrings);
+                startActivity(intent);
+                finish();
+
                 Toast.makeText(this, "ยินดีต้อนรับ " + loginStrings[1] + " " + loginStrings[2],
                         Toast.LENGTH_SHORT).show();
             } else {
@@ -96,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } catch (Exception e) {
+            Log.d("StoreV1", "e ==> " + e.toString());
             Toast.makeText(this, "ไม่มี " + userString + " ในฐานข้อมูลของเรา",
                     Toast.LENGTH_SHORT).show();
         }
